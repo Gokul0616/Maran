@@ -219,5 +219,3 @@ if __name__ == "__main__":
     # Generate custom image
     img = system.generate("sunset over a lake")
     img.save('out.png')
-
-explain this coed
