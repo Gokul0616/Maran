@@ -1,0 +1,262 @@
+# monitoring_config.yaml
+# Configuration file for Maran Advanced Monitoring System
+
+# System Information
+system:
+  name: "Maran AI Agent"
+  version: "2.0.0"
+  environment: "development"  # development, staging, production
+
+# Model Configuration
+model:
+  d_model: 256
+  nhead: 8
+  num_layers: 4
+  max_len: 512
+  dropout: 0.1
+  vocab_size: 10000
+  quantization: false
+  device: "auto"  # auto, cpu, cuda
+
+# Training Configuration
+training:
+  epochs: 3
+  batch_size: 8
+  learning_rate: 0.0001
+  grad_accum_steps: 4
+  eval_interval: 1
+  save_interval: 1
+  early_stopping_patience: 5
+  max_grad_norm: 1.0
+
+# Monitoring Configuration
+monitoring:
+  # Prometheus metrics server
+  metrics_port: 9090
+  metrics_path: "/metrics"
+  
+  # Web dashboard
+  dashboard_port: 8080
+  dashboard_host: "0.0.0.0"
+  
+  # Health monitoring
+  health_check_interval: 30  # seconds
+  health_thresholds:
+    cpu_percent: 80.0
+    memory_percent: 85.0
+    disk_percent: 90.0
+    gpu_memory_percent: 90.0
+    response_time_ms: 5000.0
+  
+  # Performance monitoring
+  performance:
+    track_all_operations: true
+    max_metrics_history: 10000
+    profile_memory: true
+    profile_gpu: true
+  
+  # Error tracking
+  error_tracking:
+    enabled: true
+    database_path: "logs/errors.db"
+    max_stack_trace_length: 5000
+    auto_resolve_after_hours: 24
+  
+  # Cost tracking
+  cost_tracking:
+    enabled: true
+    cost_rates:
+      gpt_inference: 0.0001  # per token
+      gpu_hour: 0.50         # per hour
+      cpu_hour: 0.05         # per hour
+      storage_gb_month: 0.02 # per GB per month
+      bandwidth_gb: 0.01     # per GB
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "json"  # json, text
+  max_file_size_mb: 100
+  max_files: 10
+  log_directory: "logs"
+  
+  # Log files
+  files:
+    main: "logs/maran.log"
+    errors: "logs/errors.log"
+    performance: "logs/performance.log"
+    audit: "logs/audit.log"
+  
+  # Enable/disable specific loggers
+  loggers:
+    model: true
+    reasoning: true
+    memory: true
+    agent: true
+    safety: true
+    cost: true
+
+# Safety Configuration
+safety:
+  code_execution:
+    timeout: 5  # seconds
+    memory_limit_mb: 512
+    use_docker: true
+    allowed_imports: ["math", "random", "datetime", "json", "re"]
+    forbidden_operations: ["eval", "exec", "open", "__import__"]
+  
+  rate_limiting:
+    requests_per_minute: 100
+    burst_size: 10
+    enabled: true
+  
+  authentication:
+    enabled: false
+    api_key_required: false
+    session_timeout_hours: 24
+
+# Storage Configuration
+storage:
+  models_directory: "models"
+  logs_directory: "logs"
+  cache_directory: "cache"
+  temp_directory: "temp"
+  
+  # Database settings
+  databases:
+    errors: "logs/errors.db"
+    metrics: "logs/metrics.db"
+    audit: "logs/audit.db"
+  
+  # Cleanup settings
+  cleanup:
+    enabled: true
+    max_log_age_days: 30
+    max_cache_size_gb: 10
+    cleanup_interval_hours: 24
+
+# Network Configuration
+network:
+  timeout_seconds: 30
+  max_retries: 3
+  backoff_factor: 1.5
+  
+  # Proxy settings (if needed)
+  proxy:
+    enabled: false
+    http_proxy: ""
+    https_proxy: ""
+    no_proxy: "localhost,127.0.0.1"
+
+# Integration Configuration
+integrations:
+  # Prometheus
+  prometheus:
+    enabled: true
+    push_gateway: ""
+    job_name: "maran-ai-agent"
+    push_interval_seconds: 60
+  
+  # Grafana (if available)
+  grafana:
+    enabled: false
+    dashboard_url: ""
+    api_key: ""
+  
+  # External APIs
+  external_apis:
+    openai:
+      enabled: false
+      api_key: ""
+      model: "gpt-3.5-turbo"
+      max_tokens: 1000
+    
+    anthropic:
+      enabled: false
+      api_key: ""
+      model: "claude-3-sonnet"
+      max_tokens: 1000
+
+# Development Configuration
+development:
+  debug_mode: true
+  hot_reload: false
+  profiling_enabled: true
+  test_mode: false
+  
+  # Mock settings for testing
+  mock_external_apis: true
+  simulate_errors: false
+  load_test_data: false
+
+# Production Configuration
+production:
+  debug_mode: false
+  hot_reload: false
+  profiling_enabled: false
+  ssl_enabled: true
+  
+  # Security settings
+  security:
+    encrypt_logs: true
+    audit_all_operations: true
+    require_authentication: true
+    session_security: true
+
+# Alerts Configuration
+alerts:
+  enabled: true
+  
+  # Alert channels
+  channels:
+    console: true
+    file: true
+    webhook: false
+    email: false
+  
+  # Alert rules
+  rules:
+    high_cpu:
+      metric: "cpu_percent"
+      threshold: 90.0
+      duration_minutes: 5
+      severity: "warning"
+    
+    high_memory:
+      metric: "memory_percent"
+      threshold: 95.0
+      duration_minutes: 3
+      severity: "critical"
+    
+    high_error_rate:
+      metric: "error_rate"
+      threshold: 10.0  # errors per minute
+      duration_minutes: 2
+      severity: "critical"
+    
+    low_health_score:
+      metric: "health_score"
+      threshold: 50.0
+      duration_minutes: 10
+      severity: "warning"
+
+# Backup Configuration
+backup:
+  enabled: true
+  interval_hours: 6
+  retention_days: 30
+  
+  # What to backup
+  include:
+    - "models/"
+    - "logs/"
+    - "configs/"
+  
+  # Where to backup
+  destination:
+    type: "local"  # local, s3, gcs
+    path: "backups/"
+    
+  # Compression
+  compression: true
+  encryption: false
