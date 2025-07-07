@@ -266,11 +266,11 @@ class SystemHealthMonitor:
         }
         
         # Prometheus metrics
-        self.system_cpu = Gauge('system_cpu_percent', 'System CPU usage')
-        self.system_memory = Gauge('system_memory_percent', 'System memory usage')
-        self.system_disk = Gauge('system_disk_percent', 'System disk usage')
-        self.system_gpu_memory = Gauge('system_gpu_memory_percent', 'GPU memory usage')
-        self.health_score = Gauge('system_health_score', 'Overall system health score')
+        self.system_cpu = Gauge('system_cpu_percent', 'System CPU usage', registry=PROMETHEUS_REGISTRY)
+        self.system_memory = Gauge('system_memory_percent', 'System memory usage', registry=PROMETHEUS_REGISTRY)
+        self.system_disk = Gauge('system_disk_percent', 'System disk usage', registry=PROMETHEUS_REGISTRY)
+        self.system_gpu_memory = Gauge('system_gpu_memory_percent', 'GPU memory usage', registry=PROMETHEUS_REGISTRY)
+        self.health_score = Gauge('system_health_score', 'Overall system health score', registry=PROMETHEUS_REGISTRY)
         
     def start_monitoring(self):
         """Start the health monitoring thread"""
