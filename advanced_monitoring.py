@@ -100,22 +100,26 @@ class PerformanceProfiler:
         self.operation_duration = Histogram(
             'operation_duration_seconds',
             'Duration of operations',
-            ['operation_type', 'status']
+            ['operation_type', 'status'],
+            registry=PROMETHEUS_REGISTRY
         )
         self.memory_usage = Gauge(
             'memory_usage_bytes',
             'Memory usage in bytes',
-            ['operation_type']
+            ['operation_type'],
+            registry=PROMETHEUS_REGISTRY
         )
         self.cpu_usage = Gauge(
             'cpu_usage_percent',
             'CPU usage percentage',
-            ['operation_type']
+            ['operation_type'],
+            registry=PROMETHEUS_REGISTRY
         )
         self.gpu_usage = Gauge(
             'gpu_usage_percent', 
             'GPU usage percentage',
-            ['operation_type']
+            ['operation_type'],
+            registry=PROMETHEUS_REGISTRY
         )
     
     def start_operation(self, operation: str, context: Dict[str, Any] = None) -> str:
