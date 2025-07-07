@@ -551,9 +551,9 @@ class CostTracker:
         }
         
         # Prometheus metrics
-        self.total_cost = Gauge('total_cost_usd', 'Total accumulated cost in USD')
-        self.hourly_cost = Gauge('hourly_cost_usd', 'Cost per hour', ['resource_type'])
-        self.token_cost = Counter('token_cost_total', 'Total token processing cost')
+        self.total_cost = Gauge('total_cost_usd', 'Total accumulated cost in USD', registry=PROMETHEUS_REGISTRY)
+        self.hourly_cost = Gauge('hourly_cost_usd', 'Cost per hour', ['resource_type'], registry=PROMETHEUS_REGISTRY)
+        self.token_cost = Counter('token_cost_total', 'Total token processing cost', registry=PROMETHEUS_REGISTRY)
     
     def track_inference_cost(self, model_name: str, tokens_used: int, trace_id: str = None):
         """Track cost for model inference"""
