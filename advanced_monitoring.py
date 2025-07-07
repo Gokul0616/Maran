@@ -413,12 +413,14 @@ class ErrorTracker:
         self.error_count = Counter(
             'errors_total',
             'Total number of errors',
-            ['error_type', 'severity', 'component']
+            ['error_type', 'severity', 'component'],
+            registry=PROMETHEUS_REGISTRY
         )
         self.error_rate = Gauge(
             'error_rate_per_minute',
             'Error rate per minute',
-            ['error_type']
+            ['error_type'],
+            registry=PROMETHEUS_REGISTRY
         )
     
     def _init_database(self):
