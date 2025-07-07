@@ -15,6 +15,10 @@ from prometheus_client import Gauge, Counter, Histogram, Info, start_http_server
 import sqlite3
 from pathlib import Path
 
+# Create a single Prometheus registry to avoid conflicts
+from prometheus_client import CollectorRegistry
+PROMETHEUS_REGISTRY = CollectorRegistry()
+
 # ===================== ENHANCED LOGGING SYSTEM =====================
 
 class StructuredLogger:
