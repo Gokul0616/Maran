@@ -673,8 +673,8 @@ class AdvancedMonitoringSystem:
     def start(self):
         """Start all monitoring components"""
         try:
-            # Start Prometheus metrics server
-            start_http_server(self.metrics_port)
+            # Start Prometheus metrics server with our custom registry
+            start_http_server(self.metrics_port, registry=PROMETHEUS_REGISTRY)
             self.logger.log_event(
                 "INFO", "metrics_server_start",
                 f"Metrics server started on port {self.metrics_port}"
