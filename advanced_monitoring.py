@@ -654,7 +654,7 @@ class AdvancedMonitoringSystem:
         self.cost_tracker = CostTracker()
         
         # System info
-        self.system_info = Info('system_info', 'System information')
+        self.system_info = Info('system_info', 'System information', registry=PROMETHEUS_REGISTRY)
         self._set_system_info()
     
     def _set_system_info(self):
