@@ -327,7 +327,9 @@ class SimpleReasoner:
         thoughts.append(hypothesis_thought)
         
         if stream_callback:
-            asyncio.create_task(stream_callback({"type": "thought", "data": asdict(hypothesis_thought)}))
+            thought_dict = asdict(hypothesis_thought)
+            thought_dict['timestamp'] = thought_dict['timestamp'].isoformat()
+            asyncio.create_task(stream_callback({"type": "thought", "data": thought_dict}))
         
         # Generate action
         action_thought = ThoughtStep(
@@ -339,7 +341,9 @@ class SimpleReasoner:
         thoughts.append(action_thought)
         
         if stream_callback:
-            asyncio.create_task(stream_callback({"type": "thought", "data": asdict(action_thought)}))
+            thought_dict = asdict(action_thought)
+            thought_dict['timestamp'] = thought_dict['timestamp'].isoformat()
+            asyncio.create_task(stream_callback({"type": "thought", "data": thought_dict}))
         
         return thoughts
 
