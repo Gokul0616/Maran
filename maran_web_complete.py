@@ -986,7 +986,7 @@ class MaranAgent:
         }
         
         # Add hardware tools if available
-        if FULL_FEATURES:
+        if 'gpio' in optional_imports:
             try:
                 self.tools["led"] = LEDTool(CONFIG["hardware"]["led_pin"])
                 self.tools["servo"] = ServoTool(CONFIG["hardware"]["servo_pin"])
