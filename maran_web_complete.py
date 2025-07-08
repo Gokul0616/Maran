@@ -88,27 +88,11 @@ except ImportError:
     print("⚠️  GPIO not available - hardware tools disabled")
 
 try:
-    # Set up headless environment for pyautogui
-    import subprocess
-    import os
-    
-    # Try to start Xvfb virtual display
-    try:
-        subprocess.Popen(['Xvfb', ':99', '-screen', '0', '1024x768x24'], 
-                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        os.environ['DISPLAY'] = ':99'
-        time.sleep(1)  # Give Xvfb time to start
-    except:
-        pass  # Xvfb might not be available
-    
-    import pyautogui
-    # Disable fail-safe to prevent issues in headless mode
-    pyautogui.FAILSAFE = False
-    optional_imports['pyautogui'] = pyautogui
-except ImportError:
-    print("⚠️  PyAutoGUI not available - desktop automation disabled")
+    # Desktop automation disabled for headless environment
+    print("⚠️  Desktop automation disabled in headless environment")
+    pass
 except Exception as e:
-    print(f"⚠️  PyAutoGUI setup failed - desktop automation disabled: {e}")
+    print(f"⚠️  Desktop automation setup failed: {e}")
 
 try:
     import requests
