@@ -148,7 +148,7 @@ try:
     
     # Test local web server
     try:
-        response = requests.get("http://localhost:8000/api/status", timeout=5)
+        response = requests.get("http://localhost:8001/api/status", timeout=5)
         if response.status_code == 200:
             print("✅ Web server is responding")
             data = response.json()
@@ -169,7 +169,7 @@ try:
         except:
             return False
     
-    ports_to_check = [8000, 8080, 9090]
+    ports_to_check = [8001, 8080, 9090]
     for port in ports_to_check:
         if check_port('localhost', port):
             print(f"✅ Port {port} is active")
