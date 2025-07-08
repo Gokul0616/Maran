@@ -56,18 +56,52 @@ import uvicorn
 from prometheus_client import Gauge, Counter, Histogram, start_http_server, CollectorRegistry
 
 # Additional imports for complete functionality
+FULL_FEATURES = True
+optional_imports = {}
+
+# Try importing optional dependencies
 try:
     import faiss
+    optional_imports['faiss'] = faiss
+except ImportError:
+    FULL_FEATURES = False
+    print("⚠️  FAISS not available - vector similarity search disabled")
+
+try:
     import pickle
+    optional_imports['pickle'] = pickle
+except ImportError:
+    pass
+
+try:
     from datasets import load_dataset
     import itertools
-    from gpiozero import LED, Button, Servo
-    import pyautogui
-    import requests
-    FULL_FEATURES = True
-except ImportError as e:
-    print(f"⚠️  Some optional features disabled due to missing dependencies: {e}")
+    optional_imports['datasets'] = True
+except ImportError:
+    print("⚠️  Datasets library not available - will use sample data for training")
     FULL_FEATURES = False
+
+try:
+    from gpiozero import LED, Button, Servo
+    optional_imports['gpio'] = True
+except ImportError:
+    print("⚠️  GPIO not available - hardware tools disabled")
+
+try:
+    # Set up virtual display for pyautogui
+    os.environ.setdefault('DISPLAY', ':99')
+    import pyautogui
+    optional_imports['pyautogui'] = pyautogui
+except ImportError:
+    print("⚠️  PyAutoGUI not available - desktop automation disabled")
+
+try:
+    import requests
+    optional_imports['requests'] = requests
+except ImportError:
+    print("⚠️  Requests not available - web requests disabled")
+
+print(f"ℹ️  Available features: {list(optional_imports.keys())}")
 
 # ===================== CONFIGURATION =====================
 CONFIG = {
