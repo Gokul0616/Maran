@@ -689,6 +689,12 @@ class MaranAgent:
                 "error": str(e)
             }
 
+    def _serialize_thought(self, thought):
+        """Helper to serialize thought objects for JSON"""
+        thought_dict = asdict(thought)
+        thought_dict['timestamp'] = thought_dict['timestamp'].isoformat()
+        return thought_dict
+
     async def _analyze_for_tools(self, query: str, response: str, stream_callback=None):
         """Analyze if any tools should be used"""
         tool_results = {}
