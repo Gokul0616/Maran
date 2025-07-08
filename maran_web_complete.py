@@ -751,8 +751,8 @@ class WebRequestTool(BaseTool):
         
     def _execute(self, method: str, url: str, **kwargs):
         try:
-            if FULL_FEATURES:
-                response = requests.request(method, url, timeout=10, **kwargs)
+            if 'requests' in optional_imports:
+                response = optional_imports['requests'].request(method, url, timeout=10, **kwargs)
                 return {
                     "success": True,
                     "status_code": response.status_code,
