@@ -628,7 +628,7 @@ def main():
     """Main entry point"""
     print("🧠 Starting Maran AI Agent Demo...")
     print("=" * 50)
-    print("🌐 Web Interface: http://localhost:8000")
+    print("🌐 Web Interface: http://localhost:8001")
     print("🔧 Features:")
     print("   • Real-time AI conversation with thought streaming")
     print("   • Multi-panel sophisticated dashboard")
@@ -639,7 +639,7 @@ def main():
     uvicorn.run(
         app,
         host="0.0.0.0",
-        port=8000,
+        port=8001,
         log_level="info"
     )
 
