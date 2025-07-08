@@ -766,7 +766,7 @@ class WebRequestTool(BaseTool):
             return {"success": False, "error": str(e)}
 
 # Hardware tools (only if GPIO is available)
-if FULL_FEATURES:
+if 'gpio' in optional_imports:
     class LEDTool(BaseTool):
         def __init__(self, pin=17):
             super().__init__("led", f"Control LED on GPIO pin {pin}")
@@ -837,6 +837,31 @@ if FULL_FEATURES:
                 }
             except Exception as e:
                 return {"success": False, "error": str(e)}
+else:
+    # Dummy implementations when GPIO is not available
+    class LEDTool(BaseTool):
+        def __init__(self, pin=17):
+            super().__init__("led", f"LED simulation (pin {pin})")
+            self.available = False
+            
+        def _execute(self, state: str, **kwargs):
+            return {"success": False, "error": "GPIO not available - LED simulation mode"}
+
+    class ServoTool(BaseTool):
+        def __init__(self, pin=18):
+            super().__init__("servo", f"Servo simulation (pin {pin})")
+            self.available = False
+            
+        def _execute(self, angle: float, **kwargs):
+            return {"success": False, "error": "GPIO not available - Servo simulation mode"}
+
+    class SensorTool(BaseTool):
+        def __init__(self, pin=27):
+            super().__init__("sensor", f"Sensor simulation (pin {pin})")
+            self.available = False
+            
+        def _execute(self, **kwargs):
+            return {"success": False, "error": "GPIO not available - Sensor simulation mode"}
 
 # ===================== MONITORING SYSTEM =====================
 class MaranMonitor:
