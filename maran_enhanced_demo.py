@@ -793,7 +793,7 @@ def main():
     """Main entry point"""
     print("🧠 Starting Maran AI Agent - Enhanced Demo...")
     print("=" * 60)
-    print("🌐 Web Interface: http://localhost:8001")
+    print("🌐 Web Interface: http://localhost:8000")
     print("🔧 Enhanced Features:")
     print("   • Fixed WebSocket communication")
     print("   • Working message sending")
@@ -806,7 +806,7 @@ def main():
     uvicorn.run(
         app,
         host="0.0.0.0",
-        port=8001,
+        port=8000,
         log_level="info"
     )
 

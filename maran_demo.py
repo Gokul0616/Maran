@@ -7,7 +7,7 @@ A streamlined demo version of the Maran AI agent for immediate testing.
 This version uses simplified components for faster initialization.
 
 Usage: python3 maran_demo.py
-Access: http://localhost:8001
+Access: http://localhost:8000
 """
 
 import asyncio
@@ -1049,7 +1049,7 @@ async def websocket_endpoint(websocket: WebSocket):
 def main():
     print("🧠 Starting Maran AI Agent Demo...")
     print("=" * 50)
-    print(f"🌐 Demo Interface: http://localhost:8001")
+    print(f"🌐 Demo Interface: http://localhost:8000")
     print("🚀 Features:")
     print("   • Fast initialization (no training required)")
     print("   • Real-time AI conversation")
@@ -1058,7 +1058,7 @@ def main():
     print("   • Live system monitoring")
     print("=" * 50)
     
-    uvicorn.run(app, host="0.0.0.0", port=8001, log_level="info")
+    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
 
 if __name__ == "__main__":
     main()

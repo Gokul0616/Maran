@@ -12,7 +12,7 @@ A comprehensive web-based interface for the Maran AI agent system featuring:
 - Memory management and conversation history
 
 Usage: python3 maran_web_complete.py
-Access: http://localhost:8001
+Access: http://localhost:8000
 """
 
 import asyncio
@@ -120,7 +120,7 @@ CONFIG = {
     },
     "web": {
         "host": "0.0.0.0",
-        "port": 8001,
+        "port": 8000,
         "metrics_port": 9090
     },
     "hardware": {

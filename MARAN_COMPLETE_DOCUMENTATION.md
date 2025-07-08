@@ -30,7 +30,7 @@ cd /app
 python3 maran_web_complete.py
 ```
 
-**Access the web interface:** http://localhost:8001
+**Access the web interface:** http://localhost:8000
 
 ## 🎯 Features Implemented
 
@@ -220,7 +220,7 @@ CONFIG = {
 ## 🎯 Testing the System
 
 ### Basic Functionality Test
-1. Access http://localhost:8001
+1. Access http://localhost:8000
 2. Try these queries:
    - "Hello, how are you?"
    - "Help me write a Python function"

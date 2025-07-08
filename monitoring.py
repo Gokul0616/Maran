@@ -24,5 +24,5 @@ class ModelMonitor:
             return result
         return wrapper
 
-    def start_server(self, port=8001):
+    def start_server(self, port=8000):
         prometheus_client.start_http_server(port)
