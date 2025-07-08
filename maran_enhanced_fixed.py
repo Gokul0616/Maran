@@ -70,7 +70,7 @@ CONFIG = {
     },
     "web": {
         "host": "0.0.0.0",
-        "port": 8001,
+        "port": 8000,
         "metrics_port": 9090
     },
     "safety": {
