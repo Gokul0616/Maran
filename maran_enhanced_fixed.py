@@ -665,7 +665,7 @@ class MaranAgent:
             
             return {
                 "response": response,
-                "thoughts": [asdict(t) for t in thoughts],
+                "thoughts": [self._serialize_thought(t) for t in thoughts],
                 "tool_results": tool_results,
                 "relevant_memories": len(relevant_memories),
                 "response_time": response_time,
