@@ -313,7 +313,9 @@ class SimpleReasoner:
         thoughts.append(initial_thought)
         
         if stream_callback:
-            asyncio.create_task(stream_callback({"type": "thought", "data": asdict(initial_thought)}))
+            thought_dict = asdict(initial_thought)
+            thought_dict['timestamp'] = thought_dict['timestamp'].isoformat()
+            asyncio.create_task(stream_callback({"type": "thought", "data": thought_dict}))
         
         # Generate hypothesis
         hypothesis_thought = ThoughtStep(
