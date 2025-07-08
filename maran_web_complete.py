@@ -28,7 +28,7 @@ import hashlib
 import subprocess
 import tempfile
 import threading
-from collections import deque, defaultdict, Counter
+from collections import deque, defaultdict, Counter as CollectionsCounter
 from dataclasses import dataclass, asdict
 from datetime import datetime, timedelta
 from pathlib import Path
