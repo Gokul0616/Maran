@@ -180,7 +180,7 @@ class MaranBPETokenizer:
 
     def build_vocab(self, texts):
         logger.info("Training BPE tokenizer...")
-        corpus = Counter()
+        corpus = CollectionsCounter()
         for line in texts:
             words = line.strip().split()
             for word in words:
