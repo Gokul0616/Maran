@@ -932,7 +932,7 @@ class MaranAgent:
                 "Generate code from natural language descriptions."
             ] * 100  # Repeat for more variety
             
-            if FULL_FEATURES:
+            if 'datasets' in optional_imports:
                 try:
                     # Load datasets for training
                     wiki_stream = load_dataset("wikipedia", "20220301.en", split="train", streaming=True, trust_remote_code=True)
