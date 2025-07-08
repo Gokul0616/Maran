@@ -487,14 +487,14 @@ class MaranMemory:
         self._init_database()
         
         # FAISS index for vector similarity search
-        if FULL_FEATURES:
+        if 'faiss' in optional_imports:
             try:
                 self.dimension = model.d_model
-                self.index = faiss.IndexFlatL2(self.dimension)
+                self.index = optional_imports['faiss'].IndexFlatL2(self.dimension)
                 self.memory_vectors = []
             except:
                 self.index = None
-                logger.warning("FAISS not available, using text-based memory only")
+                logger.warning("FAISS initialization failed, using text-based memory only")
         else:
             self.index = None
 
