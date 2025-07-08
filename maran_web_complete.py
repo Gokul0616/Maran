@@ -162,7 +162,7 @@ class MaranBPETokenizer:
         self.id_to_token = {v: k for k, v in self.token_to_id.items()}
 
     def get_stats(self, corpus):
-        pairs = Counter()
+        pairs = CollectionsCounter()
         for word, freq in corpus.items():
             symbols = word.split()
             for i in range(len(symbols) - 1):
